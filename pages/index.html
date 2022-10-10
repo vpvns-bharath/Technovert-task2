@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee-Directory</title>
+    <!-- Bootstrap cdn -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <!-- icons -->
+    <script src="https://kit.fontawesome.com/a473b9f9d9.js" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body id="body">
+    <nav class="navbar navbar-expand-lg  bg-light">
+        <img src="../assets/images/saketa.png" class="navbar-brand saketa">
+            <ul class="navbar-nav  justify-content-between ulist ">
+                <li class="nav-item ">
+                    <h1 class="header-style mycol">Employee Directory</h1>
+                    <p>The Ultimate People Directory Experience</p>
+                </li>
+                <li class="nav-item login">
+                    <p class="header-style"><span class="mycol">Welcome,</span> Bharath Vaddadi</p>
+                    <img src="../assets/images/bharath .JPG" class="my-img">
+                </li>
+            </ul>
+    </nav>
+
+    <button class="btn toggle"><i class="fa-solid fa-right-to-bracket"></i></button>
+    <div class="screen-body d-flex"> 
+        <div class="body-left">
+            <div class="filter" id="filter">
+                <div class="filter-body">
+                    <h5 class="filter-head">Departments</h5>
+                    <button class="btn filter-btn" name="dept" value="IT">IT(1)</button>
+                    <button class="btn filter-btn" name="dept" value="Human Resources">Human Resources(1)</button>
+                    <button class="btn filter-btn" name="dept" value="MD">MD(1)</button>
+                    <button class="btn filter-btn" name="dept" value="Sales">Sales(1)</button>
+                </div>
+
+                <div class="filter-body">
+                    <h5 class="filter-head">Offices</h5>
+                    <button class="btn filter-btn" name="office" value="Seattle">Seattle(1)</button>
+                    <button class="btn filter-btn" name="office" value="India">India(1)</button>
+                </div>
+
+                <div class="filter-body">
+                    <h5 class="filter-head">Job-Titles</h5>
+                    <button class="btn filter-btn" name="jobtitle" value="SharePoint Practice Head">SharePoint Practice Head(1)</button>
+                    <button class="btn filter-btn" name="jobtitle" value=".Net Developer Lead">.Net Developer Lead(1)</button>
+                    <button class="btn filter-btn" name="jobtitle" value="Recruiting Expert">Recruiting Expert(1)</button>
+                    <button class="btn filter-btn" name="jobtitle" value="BI Developer">BI Developer(1)</button>
+                    <button class="btn filter-btn" name="jobtitle" value="Business Analyst">Business Analyst(1)</button>
+                    <button class="btn " name="jobtitle">View More..</button>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="body-right">
+            <div class="search">
+                <div id="letters" class="letter">
+                    <button class="btn btn-primary search-btn"><i class="fa-solid fa-user color"></i></button>
+                </div>
+            </div>
+            <div class="search-panel">
+                <div class="dum-flex">
+                    <label for="inp1">Search</label>
+                    <div class="input-group g1" id="inp1">
+                        <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-control" placeholder="Enter Keyword" id="inp" >
+                    </div>
+                </div>
+                <button class="btn btn-success" id="clear">Clear</button>
+                <div class="dum-flex">
+                    <label for="drop">Filter by</label>
+                    <select class=" btn btn-secondary dropdown-toggle" id="drop">
+                        <option value="Preferred Name" class="dropdown-item">Preferred Name</option>
+                        <option value="Last Name" class="dropdown-item">Last Name</option>
+                        <option value="First Name" class="dropdown-item">First Name</option>
+                        <option value="Job Title" class="dropdown-item">Job Title</option>
+                        <option value="Department" class="dropdown-item">Department</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary emp-add" id="add-emp" data-bs-toggle="modal" data-bs-target="#emp_form">Add Employee</button>
+            </div>
+            <p class="note"><b>Note :</b> Please use the advanced filter options to refine your results.</p>
+
+
+            <div class="display-body">
+                <div class="display" id="display">
+                <!-- all the employees will be displayed -->
+                
+                </div>
+                <div id="created_modals">
+                <!-- creates all modals -->
+                </div>
+            </div>
+        
+            <div class="modal fade" id="emp_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Add Employee details </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" id="form">
+                            <div>
+                                <label for="image" class="form-label">Image</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-image"></i></span>
+                                    <input type="file"  name="image" class="form-control" id="file" required>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <label for="firstName" class="form-label">FirstName</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-users-between-lines"></i></span>
+                                    <input type="text" name="firstName" class="form-control" placeholder="Enter FirstName" required>
+                                </div>
+                            </div>
+        
+                            <div >
+                                <label for="lastName" class="form-label">LastName</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-users-between-lines"></i></span>
+                                    <input type="text" id="lastName" name="lastName"class="form-control" placeholder="Enter LastName" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="preferredName" class="form-label">PreferredName</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-users-between-lines"></i></span>
+                                    <input type="text" id="preferredName" name="preferredName" class="form-control" placeholder="Enter PreferredName" required> 
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="email" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-at"></i></span>
+                                    <input type="text" id="email"
+                                    name="email" class="form-control" placeholder="Enter Email" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="jobtitle" class="form-label">JobTitle</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-user-tie"></i></span>
+                                    <input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Enter JobTitle" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="office" class="form-label">Office</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-building"></i></span>
+                                    <input type="text" id="office" name="office"
+                                    class="form-control" placeholder="Enter Office" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="dept" class="form-label">Department</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-briefcase"></i></span>
+                                    <input type="text" id="dept" name="dept" class="form-control" placeholder="Enter Department" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="phone" class="form-label">Phone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-solid fa-phone"></i></span>
+                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter PhoneNumber" required>
+                                </div>
+                            </div>
+        
+                            <div>
+                                <label for="skype" class="form-label">Skype</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" ><i class="fa-brands fa-skype"></i></span>
+                                    <input type="text" id="skype" name="skype" class="form-control" placeholder="Enter SkypeId" required>
+                                </div>
+                            </div>
+        
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" value="submit"class="btn btn-outline-success" id="form-submit">
+                    </div>
+                </form>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <!-- my js file  -->
+    <script src="../scripts/index.js"></script>
+</body>
+</html>

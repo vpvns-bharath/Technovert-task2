@@ -118,7 +118,8 @@ filter.addEventListener("click",(e)=>{
     
     let key = e.target.name;
     let value = e.target.value;
-    
+    e.target.style.background = "grey";
+    e.target.style.color = "white";
     // console.log(key,value);
     //console.log(prev_event);
     
@@ -183,9 +184,10 @@ function show_search(){
 clear.addEventListener("click",clear_data);
 
 function clear_data(){
-    search.value = "";
-    display.innerHTML="";
-    show_emp(database);
+    // search.value = "";
+    // display.innerHTML="";
+    // show_emp(database);
+    location.reload();
 }
 
 

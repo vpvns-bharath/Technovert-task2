@@ -17,19 +17,19 @@
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- custom stylesheet -->
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body id="body">
     <nav class="navbar navbar-expand-lg  bg-light">
-        <img src="images/saketa.png" class="navbar-brand saketa">
+        <img src="../assets/images/saketa.png" class="navbar-brand saketa">
             <ul class="navbar-nav  justify-content-between ulist ">
-                <li class="nav-item ">
+                <li class="nav-item title">
                     <h1 class="header-style mycol">Employee Directory</h1>
-                    <p>The Ultimate People Directory Experience</p>
+                    <p class="nav-p">The Ultimate People Directory Experience</p>
                 </li>
                 <li class="nav-item login">
-                    <p class="header-style"><span class="mycol">Welcome,</span> Bharath Vaddadi</p>
-                    <img src="images/bharath .JPG" class="my-img">
+                    <p class="login-text"><span class="mycol">Welcome,</span> Bharath Vaddadi</p>
+                    <img src="../assets/images/bharath .JPG" class="my-img">
                 </li>
             </ul>
     </nav>
@@ -57,9 +57,11 @@
                     <button class="btn filter-btn" name="jobtitle" value="SharePoint Practice Head">SharePoint Practice Head(1)</button>
                     <button class="btn filter-btn" name="jobtitle" value=".Net Developer Lead">.Net Developer Lead(1)</button>
                     <button class="btn filter-btn" name="jobtitle" value="Recruiting Expert">Recruiting Expert(1)</button>
-                    <button class="btn filter-btn" name="jobtitle" value="BI Developer">BI Developer(1)</button>
-                    <button class="btn filter-btn" name="jobtitle" value="Business Analyst">Business Analyst(1)</button>
-                    <button class="btn " name="jobtitle">View More..</button>
+                    <div class="view-more">
+                        <button class="btn filter-btn" name="jobtitle" value="BI Developer">BI Developer(1)</button>
+                        <button class="btn filter-btn" name="jobtitle" value="Business Analyst">Business Analyst(1)</button>
+                    </div>
+                    <a href="#" class="btn view-btn mycol">View More..</a>
                     
                 </div>
             </div>
@@ -67,30 +69,31 @@
 
         <div class="body-right">
             <div class="search">
-                <div id="letters" class="letter">
+                <div id="filter" class="letter">
                     <button class="btn btn-primary search-btn"><i class="fa-solid fa-user color"></i></button>
                 </div>
             </div>
             <div class="search-panel">
-                <div class="dum-flex">
+                <div class="dum-flex p-2">
                     <label for="inp1">Search</label>
-                    <div class="input-group g1" id="inp1">
-                        <span class="input-group-text" ><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" class="form-control" placeholder="Enter Keyword" id="inp" >
+                    <div class="search-bar input-group " id="inp1">
+                        <span class="input-group-text mag-glass"><i class="fa-solid fa-magnifying-glass mag-color"></i></span>
+                        <input type="text" class="form-control search-field" placeholder="Enter Keyword" id="inp" >
                     </div>
                 </div>
-                <button class="btn btn-success" id="clear">Clear</button>
-                <div class="dum-flex">
+                <button class="btn btn-success clr-btn p-2 add-margin" id="clear">Clear</button>
+                <div class="dum-flex p-2 add-margin ">
                     <label for="drop">Filter by</label>
-                    <select class=" btn btn-secondary dropdown-toggle" id="drop">
-                        <option value="Preferred Name" class="dropdown-item">Preferred Name</option>
-                        <option value="Last Name" class="dropdown-item">Last Name</option>
+                    <select class=" btn  dropdown-toggle drop" id="drop">
+                        
                         <option value="First Name" class="dropdown-item">First Name</option>
+                        <option value="Last Name" class="dropdown-item">Last Name</option>
                         <option value="Job Title" class="dropdown-item">Job Title</option>
                         <option value="Department" class="dropdown-item">Department</option>
+                        <option value="Preferred Name" class="dropdown-item">Preferred Name</option>
                     </select>
                 </div>
-                <button class="btn btn-primary emp-add" id="add-emp" data-bs-toggle="modal" data-bs-target="#emp_form">Add Employee</button>
+                <button class="btn btn-primary emp-add ms-auto p-2 " id="add-emp" data-bs-toggle="modal" data-bs-target="#emp_form">Add Employee</button>
             </div>
             <p class="note"><b>Note :</b> Please use the advanced filter options to refine your results.</p>
 
@@ -113,12 +116,12 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="" id="form">
+                        <form action="" id="form" autocomplete="off">
                             <div>
                                 <label for="image" class="form-label">Image</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-solid fa-image"></i></span>
-                                    <input type="file"  name="image" class="form-control" id="file" required>
+                                    <input type="file"  name="image" class="form-control" id="file">
                                 </div>
                             </div>
 
@@ -127,7 +130,7 @@
                                 <label for="firstName" class="form-label">FirstName</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-solid fa-users-between-lines"></i></span>
-                                    <input type="text" name="firstName" class="form-control" placeholder="Enter FirstName" required>
+                                    <input type="text" name="firstName" class="form-control" placeholder="Enter FirstName" required >
                                 </div>
                             </div>
         
@@ -143,7 +146,7 @@
                                 <label for="preferredName" class="form-label">PreferredName</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-solid fa-users-between-lines"></i></span>
-                                    <input type="text" id="preferredName" name="preferredName" class="form-control" placeholder="Enter PreferredName" required> 
+                                    <input type="text" id="preferredName" name="preferredName" class="form-control" placeholder="Enter PreferredName"> 
                                 </div>
                             </div>
         
@@ -151,8 +154,8 @@
                                 <label for="email" class="form-label">Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-solid fa-at"></i></span>
-                                    <input type="text" id="email"
-                                    name="email" class="form-control" placeholder="Enter Email" required>
+                                    <input type="email" id="email"
+                                    name="email" class="form-control" placeholder="Enter Email" >
                                 </div>
                             </div>
         
@@ -185,7 +188,7 @@
                                 <label for="phone" class="form-label">Phone</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-solid fa-phone"></i></span>
-                                    <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter PhoneNumber" required>
+                                    <input type="number" id="phone" name="phone" class="form-control" placeholder="Enter PhoneNumber">
                                 </div>
                             </div>
         
@@ -193,16 +196,18 @@
                                 <label for="skype" class="form-label">Skype</label>
                                 <div class="input-group">
                                     <span class="input-group-text" ><i class="fa-brands fa-skype"></i></span>
-                                    <input type="text" id="skype" name="skype" class="form-control" placeholder="Enter SkypeId" required>
+                                    <input type="text" id="skype" name="skype" class="form-control" placeholder="Enter SkypeId">
                                 </div>
                             </div>
         
                         
                     </div>
                     <div class="modal-footer">
-                      <input type="submit" value="submit"class="btn btn-outline-success close-btn" id="form-submit" data-bs-toggle="modal">
+                      <input type="submit" value="submit"class="btn btn-outline-success" id="form-submit">
+                      <button type="button" class="btn btn-outline-secondary form-close" data-bs-toggle="modal">close </button>
                     </div>
                 </form>
+                
                   </div>
                 </div>
               </div>
@@ -215,6 +220,6 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <!-- my js file  -->
-    <script src="./index.js"></script>
+    <script src="../scripts/index.js"></script>
 </body>
 </html>

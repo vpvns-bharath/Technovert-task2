@@ -67,6 +67,19 @@ var database = {
             dept: "Human Resources",
             phone: "99999",
             skype: "joey@skype.in"
+        },
+
+        {
+            image: "https://media1.popsugar-assets.com/files/thumbor/Jag4QheIiSRDyPige1c7d6J7X68/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/07/25/859/n/1922398/1bb1be5259779df9303e84.02388163_edit_img_image_43785815_1500923262/i/Phoebe-Buffay-Quotes-From-Friends.jpg",
+            firstName: "Pheobe",
+            lastName: "Buffay",
+            preferredName: "Phoebe",
+            email: "pheobe@gmail.com",
+            jobtitle: "Recruiting Expert",
+            office: "India",
+            dept: "Human Resources",
+            phone: "474747",
+            skype: "buffay@skype.in"
         }
     ]
 }
@@ -182,25 +195,17 @@ for(let i=0;i<filters.length;i++){
         
         //combining both the results
 
-        //  if(letter_filter.length==0 && dummy_db4.employees.size!=0){
-            if(common1.employees.size ==0 && dept_filter.length==0){
-                dummy_db.employees = common2.employees;
-            }
-            else if(common2.employees.size==0 && letter_filter.length==0){
-                dummy_db.employees = common1.employees;
-            }
-           else{
-               dummy_db.employees = new Set(
-                   [...common1.employees].filter(element => common2.employees.has(element))
-               );
-            }
-        
-        // }
-        // else{
-        //     dummy_db.employees = new Set(
-        //         [...common1.employees].filter(element => common2.employees.has(element))
-        //     );
-        // }
+        if(common1.employees.size ==0 && dept_filter.length==0){
+            dummy_db.employees = common2.employees;
+        }
+        else if(common2.employees.size==0 && letter_filter.length==0){
+            dummy_db.employees = common1.employees;
+        }
+        else{
+            dummy_db.employees = new Set(
+                [...common1.employees].filter(element => common2.employees.has(element))
+            );
+        }
         
         tmp_database = dummy_db;
         var tmp_database_list = convertToList(tmp_database);
@@ -286,26 +291,27 @@ view_more_btn.addEventListener("click", () => {
 
 //searching functionality
 var search = document.getElementById("inp");
-search.addEventListener("keyup", show_search);
-
-function show_search() {
-    let option = document.getElementById("drop").value;
-    let search_value = search.value.toUpperCase();
+search.addEventListener("keydown", (e)=>{
+    if(e.key=="Enter")
+    {
+        let option = document.getElementById("drop").value;
+        let search_value = search.value.toUpperCase();
     // console.log(search_value);
-    let items = display.querySelectorAll(".emp-card");
-    for (let i = 0; i < items.length; i++) {
-        let item = items[i].querySelector('.emp-text');
-        let tar = item.getElementsByClassName(option)[0].innerHTML.toUpperCase();
-        // console.log(tar);
-        if (!tar.startsWith(search_value)) {
-            items[i].style.display = "none";
-        }
-        else {
-            items[i].style.display = "initial";
+        let items = display.querySelectorAll(".emp-card");
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i].querySelector('.emp-text');
+            let tar = item.getElementsByClassName(option)[0].innerHTML.toUpperCase();
+            // console.log(tar);
+            if (!tar.startsWith(search_value)) {
+                items[i].style.display = "none";
+            }
+            else {
+                items[i].style.display = "initial";
+            }
         }
     }
+});
 
-}
 
 var clear = document.getElementById("clear");
 clear.addEventListener("click",clear_data);
@@ -502,12 +508,8 @@ path="";
 for(let i=0;i<database.employees.length;i++){
     var obj = document.getElementsByClassName("image"+i)[0];
     
-    // console.log(obj);
     obj.addEventListener("change",function(e){
-        // e.preventDefault();
         path = URL.createObjectURL(e.target.files[0]);
-        //img_path.push(path);
-       // console.log(e.target.files);
         
     })
 }
@@ -539,12 +541,7 @@ function save_details(){
                 if(path!="")
                     new_data['image'] = path;
                 
-               // console.log(new_data);
                 database.employees[val] = new_data;
-                // display.innerHTML="";
-                // document.getElementById("created_modals").innerHTML="";
-                // show_emp(database);
-                 // create();
                 var change_card = document.getElementById("card"+val);
                 change_card.innerHTML="";
                 change_card.innerHTML=`
@@ -680,3 +677,26 @@ function show_char() {
         `;
     }
 }
+
+//responsive toggle
+
+var toggle = document.getElementsByClassName("toggle")[0];
+var hide = document.getElementById("inp1");
+var bool = true;
+toggle.addEventListener('click',()=>{
+    var tar = document.getElementsByClassName('body-left')[0];
+    if(bool){
+    tar.style.display="block";
+    tar.style.position = "absolute";
+    tar.style.background = "white";
+    hide.style.display = "none";
+    bool = false;
+    }
+
+    else{
+        tar.style.display = "none";
+        hide.style.display = "flex";
+        bool = true;
+    }
+
+})

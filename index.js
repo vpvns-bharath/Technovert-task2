@@ -379,106 +379,111 @@ close_modal.addEventListener("click",()=>{
 document.body.addEventListener("load", show_emp(database), false);
 
 function show_emp(database) {
-    for (let i = 0; i < database.employees.length; i++) {
-        var element = document.createElement("div");
-        element.setAttribute("data-bs-toggle", "modal");
-        element.setAttribute("data-bs-target", "#display_fullDetails" + i);
-        element.classList.add("emp-card");
-        element.id = "card"+i;
-        element.innerHTML = `
-                <div class="emp-card-body  card-body    d-flex">
-                    <div class="emp-image">
-                    <img src="${database.employees[i].image}" alt="">
-                    </div>
-                    <div class="emp-text">
-                        <h5 class="Preferred Name"><span class="First Name">${database.employees[i].firstName}</span> <span class="Last Name">${database.employees[i].lastName}</span></h5>
-                        <p class="Job Title">${database.employees[i].jobtitle}</p>
-                        <p class="Department">${database.employees[i].dept} department</p>
-                        <div class="card-icons">
-                            <i class="fa-solid fa-square-phone"></i>
-                            <i class="fa-solid fa-envelope"></i>
-            
-                            <i class="fa-solid fa-comment"></i>
-            
-                            <i class="fa-solid fa-star"></i>
-            
-                            <i class="fa-solid fa-heart"></i>
+    if(database.employees.length==0){
+        display.innerHTML = "No Matches Found:)"
+    }
+    else{
+        for (let i = 0; i < database.employees.length; i++) {
+            var element = document.createElement("div");
+            element.setAttribute("data-bs-toggle", "modal");
+            element.setAttribute("data-bs-target", "#display_fullDetails" + i);
+            element.classList.add("emp-card");
+            element.id = "card"+i;
+            element.innerHTML = `
+                    <div class="emp-card-body  card-body    d-flex">
+                        <div class="emp-image">
+                        <img src="${database.employees[i].image}" alt="">
                         </div>
-                    
-                    </div>
-                </div>
+                        <div class="emp-text">
+                            <h5 class="Preferred Name"><span class="First Name">${database.employees[i].firstName}</span> <span class="Last Name">${database.employees[i].lastName}</span></h5>
+                            <p class="Job Title">${database.employees[i].jobtitle}</p>
+                            <p class="Department">${database.employees[i].dept} department</p>
+                            <div class="card-icons">
+                                <i class="fa-solid fa-square-phone"></i>
+                                <i class="fa-solid fa-envelope"></i>
                 
-        `;
-
-        var in_modal = document.getElementById("created_modals").innerHTML;
-        document.getElementById("created_modals").innerHTML = in_modal +
-            `
-            <div class="modal fade" id="display_fullDetails${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Employee Details</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <i class="fa-solid fa-comment"></i>
+                
+                                <i class="fa-solid fa-star"></i>
+                
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                        
                         </div>
-                        <div class="modal-body">
-                            <div class="emp-det" id="emp-det${i}">
-                                <img class="modal-img" src="${database.employees[i].image}" alt="">
-                                <form action="" id="details${i}">
-
-                                        <div class="d-flex emp-det">
-                                            <label>Change Image:</label>
-                                            <input type="file" name="image" class="form-control g1 image${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].image}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>First Name:</label>
-                                            <input type="text" name="firstName" class="form-control g1 firstName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].firstName}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Last Name:</label>
-                                            <input type="text" name="lastName" class="form-control g1 lastName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].lastName}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Preffered Name:</label>
-                                            <input type="text" name="preferredName" class="form-control g1 preferredName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].preferredName}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Email: </label>
-                                            <input type="text" name="email" class="form-control g1 email${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].email}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Job Title: </label>
-                                            <input type="text" name="jobtitle" class="form-control g1 jobtitle${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].jobtitle}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Office: </label>
-                                            <input type="text" name="office" class="form-control g1 office${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].office}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Department:</label>
-                                            <input type="text" name="dept" class="form-control g1 dept${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].dept}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Phone: </label>
-                                            <input type="text" name="phone" class="form-control g1 phone${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].phone}" disabled>
-                                        </div>
-                                        <div class="d-flex emp-det">
-                                            <label>Skype Id:</label> 
-                                            <input type="text" name="skype" class="form-control g1 skype${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].skype}" disabled>
-                                        </div>
-                                </form>
+                    </div>
+                    
+            `;
+    
+            var in_modal = document.getElementById("created_modals").innerHTML;
+            document.getElementById("created_modals").innerHTML = in_modal +
+                `
+                <div class="modal fade" id="display_fullDetails${i}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4>Employee Details</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="emp-det" id="emp-det${i}">
+                                    <img class="modal-img" src="${database.employees[i].image}" alt="">
+                                    <form action="" id="details${i}">
+    
+                                            <div class="d-flex emp-det">
+                                                <label>Change Image:</label>
+                                                <input type="file" name="image" class="form-control g1 image${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].image}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>First Name:</label>
+                                                <input type="text" name="firstName" class="form-control g1 firstName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].firstName}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Last Name:</label>
+                                                <input type="text" name="lastName" class="form-control g1 lastName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].lastName}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Preffered Name:</label>
+                                                <input type="text" name="preferredName" class="form-control g1 preferredName${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].preferredName}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Email: </label>
+                                                <input type="text" name="email" class="form-control g1 email${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].email}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Job Title: </label>
+                                                <input type="text" name="jobtitle" class="form-control g1 jobtitle${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].jobtitle}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Office: </label>
+                                                <input type="text" name="office" class="form-control g1 office${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].office}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Department:</label>
+                                                <input type="text" name="dept" class="form-control g1 dept${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].dept}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Phone: </label>
+                                                <input type="text" name="phone" class="form-control g1 phone${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].phone}" disabled>
+                                            </div>
+                                            <div class="d-flex emp-det">
+                                                <label>Skype Id:</label> 
+                                                <input type="text" name="skype" class="form-control g1 skype${i}" id="emp-data-inp${i}" placeholder="${database.employees[i].skype}" disabled>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-danger" name="${i}" id="edit">Edit</button>
+                                <button type="submit" class="btn btn-outline-primary" name="${i}" id="save" data-bs-dismiss="modal">Save</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-outline-danger" name="${i}" id="edit">Edit</button>
-                            <button type="submit" class="btn btn-outline-primary" name="${i}" id="save" data-bs-dismiss="modal">Save</button>
-                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-
-        display.appendChild(element);
-
+            `;
+    
+            display.appendChild(element);
+    
+        }
     }
 }
 
@@ -591,7 +596,7 @@ function save_details(){
                         </div>
                         <div class="d-flex emp-det">
                             <label>Email: </label>
-                            <input type="text" name="email" class="form-control g1 email${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].email}" disabled>
+                            <input type="email" name="email" class="form-control g1 email${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].email}" disabled>
                         </div>
                         <div class="d-flex emp-det">
                             <label>Job Title: </label>
@@ -607,7 +612,7 @@ function save_details(){
                         </div>
                         <div class="d-flex emp-det">
                             <label>Phone: </label>
-                            <input type="text" name="phone" class="form-control g1 phone${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].phone}" disabled>
+                            <input type="tel" name="phone" class="form-control g1 phone${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].phone}" disabled>
                         </div>
                         <div class="d-flex emp-det">
                             <label>Skype Id:</label> 

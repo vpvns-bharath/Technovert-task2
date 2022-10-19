@@ -13,7 +13,7 @@ var database = {
             jobtitle: "SharePoint Practice Head",
             office: "Seattle",
             dept: "IT",
-            phone: "444444",
+            phone: "4444444444",
             skype: "bing@skype.in"
         },
 
@@ -26,7 +26,7 @@ var database = {
             jobtitle: ".Net Developer Lead",
             office: "India",
             dept: "IT",
-            phone: "55558",
+            phone: "5555812357",
             skype: "ross@skype.in"
         },
 
@@ -39,7 +39,7 @@ var database = {
             jobtitle: "BI Developer",
             office: "Seattle",
             dept: "Sales",
-            phone: "56444",
+            phone: "5644456897",
             skype: "rachel@skype.in"
         },
 
@@ -52,7 +52,7 @@ var database = {
             jobtitle: "Business Analyst",
             office: "India",
             dept: "Sales",
-            phone: "578779",
+            phone: "5787791247",
             skype: "monica@skype.in"
         },
 
@@ -65,7 +65,7 @@ var database = {
             jobtitle: "Recruiting Expert",
             office: "Seattle",
             dept: "Human Resources",
-            phone: "99999",
+            phone: "9999988888",
             skype: "joey@skype.in"
         },
 
@@ -78,7 +78,7 @@ var database = {
             jobtitle: "Recruiting Expert",
             office: "India",
             dept: "Human Resources",
-            phone: "474747",
+            phone: "4747475454",
             skype: "buffay@skype.in"
         }
     ]
@@ -349,19 +349,25 @@ function add_emp(e){
     e.preventDefault();
     
     var data = Object.fromEntries(new FormData(form).entries());
-    data['image'] = tmppath;
-    database.employees.push(data);
-    display.innerHTML = "";
-    document.getElementById('created_modals').innerHTML="";
-    show_emp(database);
-    edit_details();
-    save_details();
-    for(let i=0;i<all_inp.length;i++){
-        all_inp[i].disabled=true;
+    if(isValid(data['email'],data['phone']))
+    {
+        data['image'] = tmppath;
+        database.employees.push(data);
+        display.innerHTML = "";
+        document.getElementById('created_modals').innerHTML="";
+        show_emp(database);
+        edit_details();
+        save_details();
+        for(let i=0;i<all_inp.length;i++){
+            all_inp[i].disabled=true;
+        }
+        count_param();
+        create();
+        close_modal.style.display="block";
     }
-    count_param();
-    create();
-    close_modal.style.display="block";
+    else{
+        alert("Specified email or mobile is invalid form.Please re-enter");
+    }
     //console.log(data);
 }
 
@@ -474,7 +480,7 @@ function show_emp(database) {
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-outline-danger" name="${i}" id="edit">Edit</button>
-                                <button type="submit" class="btn btn-outline-primary" name="${i}" id="save" data-bs-dismiss="modal">Save</button>
+                                <button type="submit" class="btn btn-outline-primary" name="${i}" id="save" >Save</button>
                             </div>
                         </div>
                     </div>
@@ -534,101 +540,108 @@ function save_details(){
            // console.log(val);
             var form_name = "details"+val;
             var new_data = Object.fromEntries(new FormData(document.getElementById(form_name)).entries());
-            
-           // console.log(new_data);
-            if(Object.keys(new_data).length!=0){
-                new_data["image"]="";
-                for(var key in new_data){
-                    if(new_data[key]==""){
-                        new_data[key] = document.getElementsByClassName(key+i)[0].getAttribute('placeholder');
+            if(isValid(new_data['email'],new_data['phone']))
+            {
+                if(Object.keys(new_data).length!=0){
+                    new_data["image"]="";
+                    for(var key in new_data){
+                        if(new_data[key]==""){
+                            new_data[key] = document.getElementsByClassName(key+i)[0].getAttribute('placeholder');
+                        }
                     }
-                }
-                if(path!="")
-                    new_data['image'] = path;
-                
-                database.employees[val] = new_data;
-                var change_card = document.getElementById("card"+val);
-                change_card.innerHTML="";
-                change_card.innerHTML=`
-                        <div class="emp-card-body  card-body    d-flex">
-                        <div class="emp-image">
-                        <img src="${database.employees[val].image}" alt="">
-                        </div>
-                        <div class="emp-text">
-                            <h5 class="Preferred Name"><span class="First Name">${database.employees[val].firstName}</span> <span class="Last Name">${database.employees[val].lastName}</span></h5>
-                            <p class="Job Title">${database.employees[val].jobtitle}</p>
-                            <p class="Department">${database.employees[val].dept} department</p>
-                            <div class="card-icons">
-                                <i class="fa-solid fa-square-phone"></i>
-                                <i class="fa-solid fa-envelope"></i>
-                
-                                <i class="fa-solid fa-comment"></i>
-                
-                                <i class="fa-solid fa-star"></i>
-                
-                                <i class="fa-solid fa-heart"></i>
+                    if(path!="")
+                        new_data['image'] = path;
+    
+                    database.employees[val] = new_data;
+                    var change_card = document.getElementById("card"+val);
+                    change_card.innerHTML="";
+                    change_card.innerHTML=`
+                            <div class="emp-card-body  card-body    d-flex">
+                            <div class="emp-image">
+                            <img src="${database.employees[val].image}" alt="">
                             </div>
-                        
+                            <div class="emp-text">
+                                <h5 class="Preferred Name"><span class="First Name">${database.employees[val].firstName}</span> <span class="Last Name">${database.employees[val].lastName}</span></h5>
+                                <p class="Job Title">${database.employees[val].jobtitle}</p>
+                                <p class="Department">${database.employees[val].dept} department</p>
+                                <div class="card-icons">
+                                    <i class="fa-solid fa-square-phone"></i>
+                                    <i class="fa-solid fa-envelope"></i>
+                    
+                                    <i class="fa-solid fa-comment"></i>
+                    
+                                    <i class="fa-solid fa-star"></i>
+                    
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                            
+                            </div>
                         </div>
-                    </div>
-                `;
-                var change_modal = document.getElementById("emp-det"+val);
-                change_modal.innerHTML="";
-                change_modal.innerHTML = `
-                <img class="modal-img" src="${database.employees[val].image}" alt="">
-                <form action="" id="details${val}">
-
-                        <div class="d-flex emp-det">
-                            <label>Change Image:</label>
-                            <input type="file" name="image" class="form-control g1 image${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].image}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>First Name:</label>
-                            <input type="text" name="firstName" class="form-control g1 firstName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].firstName}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Last Name:</label>
-                            <input type="text" name="lastName" class="form-control g1 lastName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].lastName}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Preffered Name:</label>
-                            <input type="text" name="preferredName" class="form-control g1 preferredName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].preferredName}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Email: </label>
-                            <input type="email" name="email" class="form-control g1 email${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].email}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Job Title: </label>
-                            <input type="text" name="jobtitle" class="form-control g1 jobtitle${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].jobtitle}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Office: </label>
-                            <input type="text" name="office" class="form-control g1 office${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].office}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Department:</label>
-                            <input type="text" name="dept" class="form-control g1 dept${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].dept}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Phone: </label>
-                            <input type="tel" name="phone" class="form-control g1 phone${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].phone}" disabled>
-                        </div>
-                        <div class="d-flex emp-det">
-                            <label>Skype Id:</label> 
-                            <input type="text" name="skype" class="form-control g1 skype${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].skype}" disabled>
-                        </div>
-                </form>
-                `;
-
-             
-        } 
-        edit_details();
-        save_details();
-        count_param();
-        create();  
-                      
+                    `;
+                    var change_modal = document.getElementById("emp-det"+val);
+                    change_modal.innerHTML="";
+                    change_modal.innerHTML = `
+                    <img class="modal-img" src="${database.employees[val].image}" alt="">
+                    <form action="" id="details${val}">
+    
+                            <div class="d-flex emp-det">
+                                <label>Change Image:</label>
+                                <input type="file" name="image" class="form-control g1 image${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].image}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>First Name:</label>
+                                <input type="text" name="firstName" class="form-control g1 firstName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].firstName}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Last Name:</label>
+                                <input type="text" name="lastName" class="form-control g1 lastName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].lastName}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Preffered Name:</label>
+                                <input type="text" name="preferredName" class="form-control g1 preferredName${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].preferredName}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Email: </label>
+                                <input type="email" name="email" class="form-control g1 email${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].email}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Job Title: </label>
+                                <input type="text" name="jobtitle" class="form-control g1 jobtitle${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].jobtitle}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Office: </label>
+                                <input type="text" name="office" class="form-control g1 office${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].office}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Department:</label>
+                                <input type="text" name="dept" class="form-control g1 dept${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].dept}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Phone: </label>
+                                <input type="text" name="phone" class="form-control g1 phone${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].phone}" disabled>
+                            </div>
+                            <div class="d-flex emp-det">
+                                <label>Skype Id:</label> 
+                                <input type="text" name="skype" class="form-control g1 skype${val}" id="emp-data-inp${val}" placeholder="${database.employees[val].skype}" disabled>
+                            </div>
+                    </form>
+                    `;
+                }
+                $("#display_fullDetails"+val).modal("toggle"); 
+                edit_details();
+                // save_details();
+                count_param();
+                create(); 
+                   
+            }
+            else{
+                alert("Specified email or phone number is of invalid form. Please enter again");
+                
+            }
+           // console.log(new_data);
+                
         })
+
     }
 }
 
@@ -705,3 +718,16 @@ toggle.addEventListener('click',()=>{
     }
 
 })
+
+function isValid(email,mobile){
+    var b1 = true;
+    var b2 = true;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(email!="" && email.match(mailformat)==null){
+        b1=false;
+    }
+    if(mobile!="" && mobile.length!=10){
+        b2=false;
+    }
+    return b1&&b2;
+}

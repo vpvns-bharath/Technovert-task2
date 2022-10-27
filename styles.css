@@ -12,6 +12,8 @@ body
 .body-left
 {
 	width: 275px;
+	display: block;
+	position:static;
 }
 .body-right
 {
@@ -39,13 +41,12 @@ body
 }
 .display
 {
-	display: flex;
-	flex-wrap: wrap;
-	column-gap: 10px;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: auto auto auto auto;
 	row-gap: 20px;
-	padding: 10px 20px;
-	
-	
+	padding: 20px 30px;
+
 }
 .display-body
 {
@@ -278,42 +279,93 @@ body
 
 
 
-@media only screen and (min-width:1536px)
+@media only screen and (min-width:2135px)
 {
+	.add-margin{
+		margin-left: 20px;
+	}
+	.clr-btn{
+		margin-left: 20px;
+	}
+	.display{
+		grid-template-columns: auto auto auto auto auto auto;
+	}
 	.letter{
 		justify-content: space-between;
 	}
 }
 
+@media only screen and (max-width:2135px){
+	.letter{
+		justify-content: space-between;
+	}
+	
+}
+
+@media only screen and (max-width:1527px){
+	.display{
+		grid-template-columns: auto  auto auto ;
+	}
+	.letter{
+		justify-content:left;
+	}
+}
+
 @media only screen and (max-width:1173px)
 {
+	.body-right{
+		width: 100%;
+	}
 	.toggle{
 		display: block;
 	}
-	.emp-add{
-		margin-left: 0 !important;
-	}
+	
 	.body-left{
 		display: none;
 	}
 }
 
-@media only screen and (max-width:843px) 
+@media only screen and (max-width:937px)
 {
-	.clr-btn{
-		margin-left: auto !important;
-	}
-	.emp-add{
-		margin-left: auto !important;
+	.display{
+		grid-template-columns: auto auto;
 	}
 }
 
-@media only screen and (max-width:513px)
+@media only screen and (max-width:884px) 
 {
 	.clr-btn{
-		margin:0 auto !important;
+		margin-left: auto !important;
 	}
 	.emp-add{
 		margin: 0 auto !important;
 	}
+}
+
+@media only screen and (max-width:755px) 
+{
+	.emp-add{
+		margin: 0 0 0 auto !important;
+	}
+}
+
+@media only screen and (max-width:657px)
+{
+	.display{
+		grid-template-columns: auto;
+	}
+} 
+
+@media only screen and (max-width:484px)
+{
+	.search-panel{
+		justify-content: center;
+	}
+	.clr-btn{
+		margin-left: 0 !important;
+	}
+	.emp-add{
+		margin-left: 0 !important;
+	}
+
 } 

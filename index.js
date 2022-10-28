@@ -700,24 +700,36 @@ function show_char() {
 
 var toggle = document.getElementsByClassName("toggle")[0];
 var hide = document.getElementById("inp1");
-var bool = true;
+var bool = false;
+
+var tar = document.getElementsByClassName('body-left')[0];
 toggle.addEventListener('click',()=>{
-    var tar = document.getElementsByClassName('body-left')[0];
-    if(bool){
+    
+    if(bool==false){
     tar.style.display="block";
     tar.style.position = "absolute";
     tar.style.background = "white";
     hide.style.display = "none";
-    bool = false;
+    bool = true;
     }
 
     else{
         tar.style.display = "none";
         hide.style.display = "flex";
-        bool = true;
+        bool = false;
     }
 
 })
+
+$(window).resize(function(){
+    if(screen.width>1173){
+        tar.style.display="block";
+        tar.style.position="static";
+    }
+    else{
+        tar.style.display="none";
+    }
+});
 
 function isValid(email,mobile){
     var b1 = true;
@@ -731,3 +743,4 @@ function isValid(email,mobile){
     }
     return b1&&b2;
 }
+

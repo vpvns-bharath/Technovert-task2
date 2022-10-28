@@ -293,11 +293,27 @@ body
 	.letter{
 		justify-content: space-between;
 	}
+	.toggle{
+		display: none;
+	}
+	
+	.body-left{
+		display: block;
+		position: static;
+	}
 }
 
 @media only screen and (max-width:2135px){
 	.letter{
 		justify-content: space-between;
+	}
+	.toggle{
+		display: none;
+	}
+	
+	.body-left{
+		display: block;
+		position: static;
 	}
 	
 }
@@ -308,6 +324,14 @@ body
 	}
 	.letter{
 		justify-content:left;
+	}
+	.toggle{
+		display: none;
+	}
+	
+	.body-left{
+		display: block;
+		position: static;
 	}
 }
 
